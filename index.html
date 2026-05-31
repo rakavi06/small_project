@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
+    <title>Result Document</title>
     <style>
         * {
             box-sizing: border-box;
@@ -14,16 +14,15 @@
 
         body {
             background-color: #ffffff;
-            color: #333333;
-            padding-bottom: 60px; /* Space for the fixed bottom button */
+            color: #1c2434;
+            padding-bottom: 52px; /* Perfect space for sticky finish footer */
         }
 
-        /* Top Header Navigation Bar */
+        /* Top Navigation Header - Exact Alignment */
         .app-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
+            padding: 14px 16px;
             background-color: #ffffff;
             position: sticky;
             top: 0;
@@ -31,59 +30,60 @@
         }
 
         .back-btn {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background-color: #f0f4f9;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            margin-right: 14px;
         }
 
         .back-btn::before {
             content: '';
             display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-left: 2.5px solid #0033a0;
-            border-bottom: 2.5px solid #0033a0;
+            width: 7px;
+            height: 7px;
+            border-left: 2px solid #0033a0;
+            border-bottom: 2px solid #0033a0;
             transform: rotate(45deg);
             margin-left: 2px;
         }
 
         .header-title {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 700;
             color: #1c2434;
-            flex-grow: 1;
-            text-align: center;
-            margin-right: -16px; /* Balance out the back button spacing */
+            letter-spacing: -0.2px;
         }
 
+        /* Precise Share Symbol Placement */
         .share-btn {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background-color: #0033a0;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            margin-left: auto; /* Pushes cleanly to the absolute right side */
         }
 
         .share-btn svg {
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             fill: #ffffff;
         }
 
-        /* Main Validation Top Banner */
+        /* Exact Top Validation Banner Tints */
         .validation-banner {
-            background-color: #d1f7dc;
-            margin: 8px 16px 16px 16px;
-            padding: 12px 16px;
-            border-radius: 24px;
+            background-color: #d2f7dd;
+            margin: 6px 16px 14px 16px;
+            padding: 10px 14px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -96,8 +96,8 @@
         }
 
         .checkmark-circle {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             background-color: #198754;
             border-radius: 50%;
             display: flex;
@@ -108,35 +108,36 @@
         .checkmark-circle::after {
             content: '';
             display: inline-block;
-            width: 5px;
-            height: 9px;
+            width: 4px;
+            height: 8px;
             border-right: 2px solid #ffffff;
             border-bottom: 2px solid #ffffff;
             transform: rotate(45deg);
             margin-bottom: 2px;
         }
 
-        /* Section Headings */
+        /* Section Subheaders */
         .section-divider {
-            border-top: 1px solid #e0e0e0;
-            margin-top: 8px;
+            border-top: 1px solid #eaedf2;
+            margin-top: 4px;
         }
 
         .section-title {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 17px;
+            font-weight: 700;
             color: #1c2434;
-            padding: 16px 16px 8px 16px;
+            padding: 14px 16px 8px 16px;
             background-color: #ffffff;
         }
 
-        /* Data Fields and Zebra Striping */
+        /* Rows Layout with Core Dynamic Inner Shade */
         .data-row {
-            padding: 12px 16px;
+            padding: 11px 16px;
         }
 
+        /* The exact subtle alternating background tint from your image */
         .data-row:nth-child(even) {
-            background-color: #f4f6fc;
+            background-color: #f4f7fb;
         }
 
         .data-row:nth-child(odd) {
@@ -144,22 +145,22 @@
         }
 
         .label {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
-            color: #0040a1;
+            color: #0033a0;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
-            margin-bottom: 4px;
+            letter-spacing: 0.2px;
+            margin-bottom: 5px;
         }
 
         .value {
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 500;
-            color: #555555;
-            line-height: 1.4;
+            color: #555860;
+            line-height: 1.35;
         }
 
-        /* Distinct Validity Status Row Styling */
+        /* Validity Block Item Row */
         .status-container {
             display: flex;
             align-items: center;
@@ -169,12 +170,12 @@
         .status-value {
             color: #198754;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 14.5px;
         }
 
         .small-checkmark {
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             background-color: #198754;
             border-radius: 50%;
             display: flex;
@@ -185,37 +186,37 @@
         .small-checkmark::after {
             content: '';
             display: inline-block;
-            width: 4px;
-            height: 7px;
+            width: 3.5px;
+            height: 6.5px;
             border-right: 1.5px solid #ffffff;
             border-bottom: 1.5px solid #ffffff;
             transform: rotate(45deg);
             margin-bottom: 1px;
         }
 
-        /* Floating Scan Shortcut Button */
+        /* Floating QR Code Graphic Icon Box */
         .floating-scan-btn {
             position: fixed;
-            bottom: 70px;
+            bottom: 66px;
             right: 16px;
-            width: 50px;
-            height: 50px;
+            width: 46px;
+            height: 46px;
             background-color: #0033a0;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 10px rgba(0, 51, 160, 0.25);
             z-index: 99;
         }
 
         .floating-scan-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             fill: #ffffff;
         }
 
-        /* Sticky Bottom Action Button */
+        /* Fixed Bottom Action Strip */
         .footer-action {
             position: fixed;
             bottom: 0;
@@ -224,11 +225,11 @@
             background-color: #0033a0;
             color: #ffffff;
             text-align: center;
-            padding: 14px;
+            padding: 15px;
             font-size: 15px;
             font-weight: 600;
+            letter-spacing: 0.2px;
             z-index: 100;
-            text-transform: none;
         }
     </style>
 </head>
@@ -236,7 +237,7 @@
 
     <header class="app-header">
         <div class="back-btn"></div>
-        <h1 class="header-title">Result</h1>
+        <div class="header-title">Result</div>
         <div class="share-btn">
             <svg viewBox="0 0 24 24">
                 <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
