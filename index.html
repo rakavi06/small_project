@@ -1,400 +1,360 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result Document</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Result</title>
 
-        body {
-            background-color: #ffffff;
-            color: #1c2434;
-            padding-bottom: 52px; /* Perfect space for sticky finish footer */
-        }
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-        /* Top Navigation Header - Exact Alignment */
-        .app-header {
-            display: flex;
-            align-items: center;
-            padding: 14px 16px;
-            background-color: #ffffff;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+<style>
 
-        .back-btn {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background-color: #f0f4f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin-right: 14px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-        .back-btn::before {
-            content: '';
-            display: inline-block;
-            width: 7px;
-            height: 7px;
-            border-left: 2px solid #0033a0;
-            border-bottom: 2px solid #0033a0;
-            transform: rotate(45deg);
-            margin-left: 2px;
-        }
+body{
+    background:#ffffff;
+}
 
-        .header-title {
-            font-size: 19px;
-            font-weight: 700;
-            color: #1c2434;
-            letter-spacing: -0.2px;
-        }
+.container{
+    width:100%;
+    max-width:450px;
+    margin:auto;
+    background:#fff;
+}
 
-        /* Precise Share Symbol Placement */
-        .share-btn {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #0033a0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin-left: auto; /* Pushes cleanly to the absolute right side */
-        }
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px;
+}
 
-        .share-btn svg {
-            width: 15px;
-            height: 15px;
-            fill: #ffffff;
-        }
+.left-section{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
 
-        /* Exact Top Validation Banner Tints */
-        .validation-banner {
-            background-color: #d2f7dd;
-            margin: 6px 16px 14px 16px;
-            padding: 10px 14px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+.back-btn{
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:#f2f4f7;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#3b4a5a;
+    font-size:13px;
+}
 
-        .validation-text {
-            color: #0f5132;
-            font-size: 18px;
-            font-weight: 600;
-        }
+.title{
+    font-size:20px;
+    font-weight:600;
+    color:#2d2d2d;
+}
 
-        .checkmark-circle {
-            width: 20px;
-            height: 20px;
-            background-color: #198754;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.share-btn{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:#1e63c6;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
 
-        .checkmark-circle::after {
-            content: '';
-            display: inline-block;
-            width: 4px;
-            height: 8px;
-            border-right: 2px solid #ffffff;
-            border-bottom: 2px solid #ffffff;
-            transform: rotate(45deg);
-            margin-bottom: 2px;
-        }
+.valid-box{
+    margin:0 10px 15px;
+    background:#d7f3d9;
+    border-radius:6px;
+    padding:12px 14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-        /* Section Subheaders */
-        .section-divider {
-            border-top: 1px solid #eaedf2;
-            margin-top: 4px;
-        }
+.valid-text{
+    color:#198754;
+    font-size:28px;
+    font-weight:600;
+}
 
-        .section-title {
-            font-size: 17px;
-            font-weight: 700;
-            color: #1c2434;
-            padding: 14px 16px 8px 16px;
-            background-color: #ffffff;
-        }
+.valid-box i{
+    color:#198754;
+    font-size:24px;
+}
 
-        /* Rows Layout with Core Dynamic Inner Shade */
-        .data-row {
-            padding: 11px 16px;
-        }
+.section-title{
+    font-size:29px;
+    font-weight:500;
+    color:#333;
+    padding:0 10px 10px;
+}
 
-        /* The exact subtle alternating background tint from your image */
-        .data-row:nth-child(even) {
-            background-color: #f4f7fb;
-        }
+.card{
+    margin-bottom:10px;
+}
 
-        .data-row:nth-child(odd) {
-            background-color: #ffffff;
-        }
+.row{
+    padding:10px;
+    border-bottom:1px solid #f0f0f0;
+}
 
-        .label {
-            font-size: 12px;
-            font-weight: 700;
-            color: #0033a0;
-            text-transform: uppercase;
-            letter-spacing: 0.2px;
-            margin-bottom: 5px;
-        }
+.label{
+    font-size:13px;
+    font-weight:700;
+    color:#274a7a;
+    text-transform:uppercase;
+    margin-bottom:5px;
+    line-height:18px;
+}
 
-        .value {
-            font-size: 14.5px;
-            font-weight: 500;
-            color: #555860;
-            line-height: 1.35;
-        }
+.value{
+    font-size:23px;
+    color:#555;
+    line-height:30px;
+}
 
-        /* Validity Block Item Row */
-        .status-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+.signature{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-        .status-value {
-            color: #198754;
-            font-weight: 600;
-            font-size: 14.5px;
-        }
+.signature .value{
+    color:#198754;
+    font-weight:600;
+}
 
-        .small-checkmark {
-            width: 15px;
-            height: 15px;
-            background-color: #198754;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.signature i{
+    color:#198754;
+    font-size:18px;
+}
 
-        .small-checkmark::after {
-            content: '';
-            display: inline-block;
-            width: 3.5px;
-            height: 6.5px;
-            border-right: 1.5px solid #ffffff;
-            border-bottom: 1.5px solid #ffffff;
-            transform: rotate(45deg);
-            margin-bottom: 1px;
-        }
+.floating-qr{
+    position:fixed;
+    right:15px;
+    bottom:90px;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#0b4fb3;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.25);
+}
 
-        /* Floating QR Code Graphic Icon Box */
-        .floating-scan-btn {
-            position: fixed;
-            bottom: 66px;
-            right: 16px;
-            width: 46px;
-            height: 46px;
-            background-color: #0033a0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 10px rgba(0, 51, 160, 0.25);
-            z-index: 99;
-        }
+.finish-btn{
+    width:100%;
+    border:none;
+    background:#003ea5;
+    color:white;
+    height:55px;
+    font-size:22px;
+    cursor:pointer;
+}
 
-        .floating-scan-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: #ffffff;
-        }
-
-        /* Fixed Bottom Action Strip */
-        .footer-action {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #0033a0;
-            color: #ffffff;
-            text-align: center;
-            padding: 15px;
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.2px;
-            z-index: 100;
-        }
-    </style>
+</style>
 </head>
 <body>
 
-    <header class="app-header">
-        <div class="back-btn"></div>
-        <div class="header-title">Result</div>
+<div class="container">
+
+    <div class="header">
+        <div class="left-section">
+            <div class="back-btn">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="title">Result</div>
+        </div>
+
         <div class="share-btn">
-            <svg viewBox="0 0 24 24">
-                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
-            </svg>
-        </div>
-    </header>
-
-    <div class="validation-banner">
-        <span class="validation-text">Valid</span>
-        <div class="checkmark-circle"></div>
-    </div>
-
-    <div class="section-divider"></div>
-    <h2 class="section-title">Validity data</h2>
-    <div class="data-row">
-        <div class="label">Signature Status</div>
-        <div class="status-container">
-            <span class="status-value">Valid</span>
-            <div class="small-checkmark"></div>
+            <i class="fa-solid fa-share-nodes"></i>
         </div>
     </div>
 
-    <div class="section-divider"></div>
-    <h2 class="section-title">Message data</h2>
-    
-    <div class="data-row">
-        <div class="label">Type de document étranger</div>
-        <div class="value">Attestation de dépôt d'une demande de titre de séjour</div>
+    <div class="valid-box">
+        <div class="valid-text">Valid</div>
+        <i class="fa-solid fa-circle-check"></i>
     </div>
 
-    <div class="data-row">
-        <div class="label">Numéro de la demande de document étranger</div>
-        <div class="value">7502202602150172361</div>
+    <div class="section-title">Validity data</div>
+
+    <div class="card">
+        <div class="row">
+            <div class="label">SIGNATURE STATUS</div>
+
+            <div class="signature">
+                <div class="value">Valid</div>
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+        </div>
     </div>
 
-    <div class="data-row">
-        <div class="label">Date de dépôt de la demande</div>
-        <div class="value">15/02/2026</div>
+    <div class="section-title">Message data</div>
+
+    <div class="card">
+
+        <div class="row">
+            <div class="label">TYPE DE DOCUMENT ÉTRANGER</div>
+            <div class="value">Attestation de dépôt d'une demande de titre de séjour</div>
+        </div>
+
+        <div class="row">
+            <div class="label">NUMÉRO DE LA DEMANDE DE DOCUMENT ÉTRANGER</div>
+            <div class="value">7502202602150172361</div>
+        </div>
+
+        <div class="row">
+            <div class="label">DATE DE DÉPÔT DE LA DEMANDE</div>
+            <div class="value">15/02/2026</div>
+        </div>
+
+        <div class="row">
+            <div class="label">AUTORISATION</div>
+            <div class="value">AUTORISE A TRAVAILLER</div>
+        </div>
+
+        <div class="row">
+            <div class="label">NUMÉRO D'ÉTRANGER</div>
+            <div class="value">NEANT</div>
+        </div>
+
+        <div class="row">
+            <div class="label">NOM PATRONYMIQUE</div>
+            <div class="value">RAVEEDRAN</div>
+        </div>
+
+        <div class="row">
+            <div class="label">NOM D'USAGE</div>
+            <div class="value">NEANT</div>
+        </div>
+
+        <div class="row">
+            <div class="label">LISTE DES PRÉNOMS</div>
+            <div class="value">VASANTH</div>
+        </div>
+
+        <div class="row">
+            <div class="label">GENRE</div>
+            <div class="value">Masculin</div>
+        </div>
+
+        <div class="row">
+            <div class="label">DATE DE NAISSANCE</div>
+            <div class="value">27/10/1999</div>
+        </div>
+
+        <div class="row">
+            <div class="label">LIEU DE NAISSANCE</div>
+            <div class="value">KILINOCHCHI</div>
+        </div>
+
+        <div class="row">
+            <div class="label">PAYS DE NAISSANCE</div>
+            <div class="value">Sri Lanka</div>
+        </div>
+
+        <div class="row">
+            <div class="label">NATIONALITÉ</div>
+            <div class="value">Sri Lanka</div>
+        </div>
+
+        <div class="row">
+            <div class="label">LIGNE 4 DE L'ADRESSE POSTALE DU DOMICILE</div>
+            <div class="value">39 RUE DES CHEMINOTS</div>
+        </div>
+
+        <div class="row">
+            <div class="label">CODE POSTAL OU CODE CEDEX DE L'ADRESSE POSTALE DU DOMICILE</div>
+            <div class="value">75018</div>
+        </div>
+
+        <div class="row">
+            <div class="label">COMMUNE DE L'ADRESSE POSTALE DU DOMICILE</div>
+            <div class="value">PARIS</div>
+        </div>
+
+        <div class="row">
+            <div class="label">CATÉGORIE DU TITRE</div>
+            <div class="value">VICTIME DE TEH</div>
+        </div>
+
+        <div class="row">
+            <div class="label">CODE PAYS DE L'ADRESSE POSTALE DU DOMICILE</div>
+            <div class="value">France</div>
+        </div>
+
     </div>
 
-    <div class="data-row">
-        <div class="label">Autorisation</div>
-        <div class="value">AUTORISE A TRAVAILLER</div>
+    <div class="section-title">Header data</div>
+
+    <div class="card">
+
+        <div class="row">
+            <div class="label">DOCUMENT TYPE</div>
+            <div class="value">Document étranger</div>
+        </div>
+
+        <div class="row">
+            <div class="label">IDENTIFIANT DE L'AUTORITÉ DE CERTIFICATION</div>
+            <div class="value">FR06</div>
+        </div>
+
+        <div class="row">
+            <div class="label">IDENTIFIANT DU CERTIFICAT</div>
+            <div class="value">DGE0</div>
+        </div>
+
+        <div class="row">
+            <div class="label">DATE D'ÉMISSION DU CACHET ÉLECTRONIQUE</div>
+            <div class="value">15/02/2026</div>
+        </div>
+
+        <div class="row">
+            <div class="label">DATE DE CRÉATION DE LA SIGNATURE ÉLECTRONIQUE</div>
+            <div class="value">15/02/2026</div>
+        </div>
+
+        <div class="row">
+            <div class="label">PAYS ÉMETTEUR DU DOCUMENT</div>
+            <div class="value">France</div>
+        </div>
+
     </div>
 
-    <div class="data-row">
-        <div class="label">Numéro d'étranger</div>
-        <div class="value">NEANT</div>
-    </div>
+</div>
 
-    <div class="data-row">
-        <div class="label">Nom patronymique</div>
-        <div class="value">RAVEEDRAN</div>
-    </div>
+<div class="floating-qr">
+    <i class="fa-solid fa-qrcode"></i>
+</div>
 
-    <div class="data-row">
-        <div class="label">Nom d'usage</div>
-        <div class="value">NEANT</div>
-    </div>
+<button class="finish-btn" onclick="closePage()">
+    Finish
+</button>
 
-    <div class="data-row">
-        <div class="label">Liste des prénoms</div>
-        <div class="value">VASANTH</div>
-    </div>
+<script>
 
-    <div class="data-row">
-        <div class="label">Genre</div>
-        <div class="value">Masculin</div>
-    </div>
+function closePage()
+{
+    window.close();
 
-    <div class="data-row">
-        <div class="label">Date de naissance</div>
-        <div class="value">27/10/1999</div>
-    </div>
+    setTimeout(function(){
+        history.back();
+    },300);
+}
 
-    <div class="data-row">
-        <div class="label">Lieu de naissance</div>
-        <div class="value">KILINOCHCHI</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Pays de naissance</div>
-        <div class="value">Sri Lanka</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Nationalité</div>
-        <div class="value">Sri Lanka</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Ligne 4 de l'adresse postale du domicile</div>
-        <div class="value">39 RUE DES CHEMINOTS</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Code postal ou code cedex de l'adresse postale du domicile</div>
-        <div class="value">75018</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Commune de l'adresse postale du domicile</div>
-        <div class="value">PARIS</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Catégorie du titre</div>
-        <div class="value">VICTIME DE TEH</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Code pays de l'adresse postale du domicile</div>
-        <div class="value">France</div>
-    </div>
-
-    <div class="section-divider"></div>
-    <h2 class="section-title">Header data</h2>
-
-    <div class="data-row">
-        <div class="label">Document type</div>
-        <div class="value">Document étranger</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Identifiant de l'autorité de certification</div>
-        <div class="value">FR06</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Identifiant du certificat</div>
-        <div class="value">DGE0</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Date d'émission du cachet électronique</div>
-        <div class="value">15/02/2026</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Date de création de la signature électronique</div>
-        <div class="value">15/02/2026</div>
-    </div>
-
-    <div class="data-row">
-        <div class="label">Pays émetteur du document</div>
-        <div class="value">France</div>
-    </div>
-
-    <div class="floating-scan-btn">
-        <svg viewBox="0 0 24 24">
-            <path d="M4 4h6v6H4V4zm2 2v2h2V6H6zm8-2h6v6h-6V4zm2 2v2h2V6h-2zM4 14h6v6H4v-6zm2 2v2h2v-2H6zm10 0h2v2h-2v-2zm2-2h2v2h-2v-2zm-2 4h2v2h-2v-2zm2 0h2v2h-2v-2zm-2-2h-2v-2h2v2zm0-4h-2V8h2v2zm2 2h2v-2h-2v2z"/>
-        </svg>
-    </div>
-
-    <div class="footer-action">
-        Finish
-    </div>
+</script>
 
 </body>
 </html>
