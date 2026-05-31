@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result Scan</title>
+    <title>Result</title>
     <style>
         * {
             box-sizing: border-box;
@@ -15,38 +15,10 @@
         body {
             background-color: #ffffff;
             color: #333333;
-            padding-bottom: 80px;
+            padding-bottom: 60px; /* Leaves space for the bottom button */
         }
 
-        /* Scan Input Overlay for Demonstration */
-        .scanner-input-container {
-            background-color: #f0f4f9;
-            padding: 12px 16px;
-            border-bottom: 2px solid #0033a0;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .scanner-input-container input {
-            flex-grow: 1;
-            padding: 8px 12px;
-            border: 1px solid #cccccc;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        .scanner-input-container button {
-            background-color: #0033a0;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* App Header Top Nav */
+        /* Top Navigation Header */
         .app-header {
             display: flex;
             align-items: center;
@@ -56,7 +28,6 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid #f0f4f9;
         }
 
         .back-btn {
@@ -87,7 +58,7 @@
             color: #1c2434;
             flex-grow: 1;
             text-align: center;
-            margin-right: -16px;
+            margin-right: -16px; /* Offsets back button for perfect centering */
         }
 
         .share-btn {
@@ -107,7 +78,7 @@
             fill: #ffffff;
         }
 
-        /* Main Validation Green Banner */
+        /* Main Validation Banner */
         .validation-banner {
             background-color: #d1f7dc;
             margin: 8px 16px 16px 16px;
@@ -145,7 +116,7 @@
             margin-bottom: 2px;
         }
 
-        /* Section Headings */
+        /* Layout Structure & Alternating Rows */
         .section-divider {
             border-top: 1px solid #e0e0e0;
             margin-top: 8px;
@@ -159,11 +130,11 @@
             background-color: #ffffff;
         }
 
-        /* Data Rows and Alternating Backgrounds */
         .data-row {
             padding: 12px 16px;
         }
 
+        /* Precise zebra striping to match original image */
         .data-row:nth-child(even) {
             background-color: #f4f6fc;
         }
@@ -188,7 +159,7 @@
             line-height: 1.4;
         }
 
-        /* Unique Row for Status Checkmark */
+        /* Status Row Styling */
         .status-container {
             display: flex;
             align-items: center;
@@ -222,7 +193,29 @@
             margin-bottom: 1px;
         }
 
-        /* Sticky Bottom Action Button */
+        /* Floating QR Shortcut Icon */
+        .floating-scan-btn {
+            position: fixed;
+            bottom: 70px;
+            right: 16px;
+            width: 50px;
+            height: 50px;
+            background-color: #0033a0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 99;
+        }
+
+        .floating-scan-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+        }
+
+        /* Full Width Bottom Call to Action */
         .footer-action {
             position: fixed;
             bottom: 0;
@@ -234,25 +227,11 @@
             padding: 14px;
             font-size: 15px;
             font-weight: 600;
-            cursor: pointer;
             z-index: 100;
-        }
-
-        /* Placeholder state message when no code is scanned yet */
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #777777;
-            font-size: 16px;
         }
     </style>
 </head>
 <body>
-
-    <div class="scanner-input-container">
-        <input type="text" id="barcodeScannerInput" placeholder="Scan barcode or type 75022026..." autofocus>
-        <button onclick="handleManualScan()">Scan</button>
-    </div>
 
     <header class="app-header">
         <div class="back-btn"></div>
@@ -264,120 +243,125 @@
         </div>
     </header>
 
-    <div id="pageContent">
-        <div class="empty-state">Waiting for a barcode scan event...</div>
+    <div class="validation-banner">
+        <span class="validation-text">Valid</span>
+        <div class="checkmark-circle"></div>
     </div>
 
-    <div class="footer-action" onclick="resetPage()">
-        Finish
+    <div class="section-divider"></div>
+    <h2 class="section-title">Validity data</h2>
+    <div class="data-row">
+        <div class="label">Signature Status</div>
+        <div class="status-container">
+            <span class="status-value">Valid</span>
+            <div class="small-checkmark"></div>
+        </div>
     </div>
 
-    <script>
-        // Simulated Secure Local Database keyed by the unique Barcode ID
-        const barcodeDatabase = {
-            "7502202602150172361": {
-                signatureStatus: "Valid",
-                docTypeEtranger: "Attestation de dépôt d'une demande de titre de séjour",
-                numDemande: "7502202602150172361",
-                dateDepot: "15/02/2026",
-                autorisation: "AUTORISE A TRAVAILLER",
-                numEtranger: "NEANT",
-                nomPatronymique: "RAVEEDRAN",
-                nomUsage: "NEANT",
-                prenoms: "VASANTH",
-                genre: "Masculin",
-                dateNaissance: "27/10/1999",
-                lieuNaissance: "KILINOCHCHI",
-                paysNaissance: "Sri Lanka",
-                nationalite: "Sri Lanka",
-                adresseLigne4: "39 RUE DES CHEMINOTS",
-                codePostal: "75018",
-                commune: "PARIS",
-                categorieTitre: "VICTIME DE TEH",
-                codePaysAdresse: "France",
-                headerDocType: "Document étranger",
-                authCertification: "FR06",
-                idCertificat: "DGE0",
-                dateEmissionCachet: "15/02/2026",
-                dateCreationSignature: "15/02/2026",
-                paysEmetteur: "France"
-            }
-        };
+    <div class="section-divider"></div>
+    <h2 class="section-title">Message data</h2>
+    
+    <div class="data-row">
+        <div class="label">Type de document étranger</div>
+        <div class="value">Attestation de dépôt d'une demande de titre de séjour</div>
+    </div>
 
-        // Standard logic listening to physical hardware barcode guns (sends input quickly + executes Enter)
-        document.getElementById('barcodeScannerInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                processScan(this.value.trim());
-                this.value = ''; // clear input field automatically after read
-            }
-        });
+    <div class="data-row">
+        <div class="label">Numéro de la demande de document étranger</div>
+        <div class="value">7502202602150172361</div>
+    </div>
 
-        function handleManualScan() {
-            const inputField = document.getElementById('barcodeScannerInput');
-            processScan(inputField.value.trim());
-            inputField.value = '';
-        }
+    <div class="data-row">
+        <div class="label">Date de dépôt de la demande</div>
+        <div class="value">15/02/2026</div>
+    </div>
 
-        // Looks up dataset and builds the matching interface directly
-        function processScan(scannedCode) {
-            const contentContainer = document.getElementById('pageContent');
-            const record = barcodeDatabase[scannedCode];
+    <div class="data-row">
+        <div class="label">Autorisation</div>
+        <div class="value">AUTORISE A TRAVAILLER</div>
+    </div>
 
-            if (record) {
-                contentContainer.innerHTML = `
-                    <div class="validation-banner">
-                        <span class="validation-text">${record.signatureStatus}</span>
-                        <div class="checkmark-circle"></div>
-                    </div>
+    <div class="data-row">
+        <div class="label">Numéro d'étranger</div>
+        <div class="value">NEANT</div>
+    </div>
 
-                    <div class="section-divider"></div>
-                    <h2 class="section-title">Validity data</h2>
-                    <div class="data-row">
-                        <div class="label">Signature Status</div>
-                        <div class="status-container">
-                            <span class="status-value">${record.signatureStatus}</span>
-                            <div class="small-checkmark"></div>
-                        </div>
-                    </div>
+    <div class="data-row">
+        <div class="label">Nom patronymique</div>
+        <div class="value">RAVEEDRAN</div>
+    </div>
 
-                    <div class="section-divider"></div>
-                    <h2 class="section-title">Message data</h2>
-                    <div class="data-row"><div class="label">Type de document étranger</div><div class="value">${record.docTypeEtranger}</div></div>
-                    <div class="data-row"><div class="label">Numéro de la demande de document étranger</div><div class="value">${record.numDemande}</div></div>
-                    <div class="data-row"><div class="label">Date de dépôt de la demande</div><div class="value">${record.dateDepot}</div></div>
-                    <div class="data-row"><div class="label">Autorisation</div><div class="value">${record.autorisation}</div></div>
-                    <div class="data-row"><div class="label">Numéro d'étranger</div><div class="value">${record.numEtranger}</div></div>
-                    <div class="data-row"><div class="label">Nom patronymique</div><div class="value">${record.nomPatronymique}</div></div>
-                    <div class="data-row"><div class="label">Nom d'usage</div><div class="value">${record.nomUsage}</div></div>
-                    <div class="data-row"><div class="label">Liste des prénoms</div><div class="value">${record.prenoms}</div></div>
-                    <div class="data-row"><div class="label">Genre</div><div class="value">${record.genre}</div></div>
-                    <div class="data-row"><div class="label">Date de naissance</div><div class="value">${record.dateNaissance}</div></div>
-                    <div class="data-row"><div class="label">Lieu de naissance</div><div class="value">${record.lieuNaissance}</div></div>
-                    <div class="data-row"><div class="label">Pays de naissance</div><div class="value">${record.paysNaissance}</div></div>
-                    <div class="data-row"><div class="label">Nationalité</div><div class="value">${record.nationalite}</div></div>
-                    <div class="data-row"><div class="label">Ligne 4 de l'adresse postale du domicile</div><div class="value">${record.adresseLigne4}</div></div>
-                    <div class="data-row"><div class="label">Code postal ou code cedex de l'adresse postale du domicile</div><div class="value">${record.codePostal}</div></div>
-                    <div class="data-row"><div class="label">Commune de l'adresse postale du domicile</div><div class="value">${record.commune}</div></div>
-                    <div class="data-row"><div class="label">Catégorie du titre</div><div class="value">${record.categorieTitre}</div></div>
-                    <div class="data-row"><div class="label">Code pays de l'adresse postale du domicile</div><div class="value">${record.codePaysAdresse}</div></div>
+    <div class="data-row">
+        <div class="label">Nom d'usage</div>
+        <div class="value">NEANT</div>
+    </div>
 
-                    <div class="section-divider"></div>
-                    <h2 class="section-title">Header data</h2>
-                    <div class="data-row"><div class="label">Document type</div><div class="value">${record.headerDocType}</div></div>
-                    <div class="data-row"><div class="label">Identifiant de l'autorité de certification</div><div class="value">${record.authCertification}</div></div>
-                    <div class="data-row"><div class="label">Identifiant du certificat</div><div class="value">${record.idCertificat}</div></div>
-                    <div class="data-row"><div class="label">Date d'émission du cachet électronique</div><div class="value">${record.dateEmissionCachet}</div></div>
-                    <div class="data-row"><div class="label">Date de création de la signature électronique</div><div class="value">${record.dateCreationSignature}</div></div>
-                    <div class="data-row"><div class="label">Pays émetteur du document</div><div class="value">${record.paysEmetteur}</div></div>
-                `;
-            } else {
-                contentContainer.innerHTML = `<div class="empty-state" style="color: #dc3545;">Error: Barcode "${scannedCode}" not found in database.</div>`;
-            }
-        }
+    <div class="data-row">
+        <div class="label">Liste des prénoms</div>
+        <div class="value">VASANTH</div>
+    </div>
 
-        function resetPage() {
-            document.getElementById('pageContent').innerHTML = '<div class="empty-state">Waiting for a barcode scan event...</div>';
-        }
-    </script>
-</body>
-</html>
+    <div class="data-row">
+        <div class="label">Genre</div>
+        <div class="value">Masculin</div>
+    </div>
+
+    <div class="data-row">
+        <div class="label">Date de naissance</div>
+        <div class="value">27/10/1999</div>
+    </div>
+
+    <div class="data-row">
+        <div class="label">Lieu de naissance</div>
+        <div class="value">KILINOCHCHI</div>
+    </div>
+
+    <div class="data-row">
+        <div class="label">Pays de naissance</div>
+        <div class="value">Sri Lanka</div>
+    </div>
+
+    <div class="data-row">
+        <div class="label">Nationalité</div>
+        <div class="value">Sri Lanka</div>
+    </div>
+
+    <div class="data-row">
+        <div class="label">Ligne 4 de l'adresse postale du domicile</div>
+        <div class="value">39 RUE DES CHEMINOTS</div>
+    </div>
+
+    <div class="data-row">
+        <div class="label">Code postal ou code cedex de l'adresse postale du domicile</div>
+        <div class="value">75018</div>
+    </div>
+
+    <div class="data-row">
+        <div class="label">Commune de l'adresse postale du domicile</div>
+        <div class="value">PARIS</div>
+    </div>
+
+    <div class="data-row">
+        <div class="label">Catégorie du titre</div>
+        <div class="value">VICTIME DE TEH</div>
+    </div>
+
+    <div class="data-row">
+        <div class="label">Code pays de l'adresse postale du domicile</div>
+        <div class="value">France</div>
+    </div>
+
+    <div class="section-divider"></div>
+    <h2 class="section-title">Header data</h2>
+
+    <div class="data-row">
+        <div class="label">Document type</div>
+        <div class="value">Document étranger</div>
+    </div>
+
+    <div class="data-row">
+        <div class="label">Identifiant de l'autorité de certification</div>
+        <div class="value">FR06</div>
+    </div>
+
+    <div class="data-row">
