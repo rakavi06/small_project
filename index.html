@@ -1,3 +1,4 @@
+HTML
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -228,13 +229,19 @@
             font-size: 15px;
             font-weight: 600;
             z-index: 100;
+            cursor: pointer; /* Added pointer cursor for better feedback */
+            user-select: none; /* Prevents accidental text selection on double tap */
+        }
+        
+        .footer-action:active {
+            background-color: #002266; /* Slight color change when pressed */
         }
     </style>
 </head>
 <body>
 
     <header class="app-header">
-        <div class="back-btn"></div>
+        <div class="back-btn" id="headerBackBtn"></div>
         <h1 class="header-title">Result</h1>
         <div class="share-btn">
             <svg viewBox="0 0 24 24">
@@ -390,9 +397,28 @@
         </svg>
     </div>
 
-    <div class="footer-action">
+    <div class="footer-action" id="finishBtn">
         Finish
     </div>
+
+    <script>
+        const finishBtn = document.getElementById('finishBtn');
+        const backBtn = document.getElementById('headerBackBtn');
+
+        function closePage() {
+            // Standard method to close current window/tab
+            window.close();
+
+            // Fallback for custom hybrid apps or alternative environments
+            if (window.history.length > 1) {
+                window.history.back();
+            }
+        }
+
+        // Event listeners for both the Finish button and Header back button
+        finishBtn.addEventListener('click', closePage);
+        backBtn.addEventListener('click', closePage);
+    </script>
 
 </body>
 </html>
